@@ -1,4 +1,4 @@
-import { trust } from '../content';
+import { mediaAsset, trust } from '../content';
 import Reveal from './Reveal';
 
 export default function Trust() {
@@ -7,7 +7,7 @@ export default function Trust() {
       {/* Фон */}
       <div className="absolute inset-0 -z-10">
         <img
-          src="/media/photos/g07.jpg"
+          src={mediaAsset('photos/g07.jpg')}
           alt=""
           aria-hidden
           loading="lazy"

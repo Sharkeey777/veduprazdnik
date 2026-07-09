@@ -6,6 +6,9 @@
  * (реальные телефон / email / город / реквизиты и т.д.).
  */
 
+/** Adds the deployment base path so public media works on GitHub Pages. */
+export const mediaAsset = (path: string) => `${import.meta.env.BASE_URL}media/${path}`;
+
 export const site = {
   name: 'Юлия Собенина',
   role: 'Ведущая мероприятий',
@@ -94,17 +97,17 @@ export const showreel = {
   title: 'Посмотрите, как Юлия работает вживую',
   text: 'Живые эмоции гостей, атмосфера событий и стиль ведения — короткие фрагменты с реальных праздников.',
   main: {
-    src: '/media/video/showreel.mp4',
-    poster: '/media/video/showreel.jpg',
+    src: mediaAsset('video/showreel.mp4'),
+    poster: mediaAsset('video/showreel.jpg'),
     label: 'Showreel — фрагменты с мероприятий',
   },
   reels: [
-    { src: '/media/video/reel1.mp4', poster: '/media/video/reel1.jpg' },
-    { src: '/media/video/reel2.mp4', poster: '/media/video/reel2.jpg' },
-    { src: '/media/video/reel3.mp4', poster: '/media/video/reel3.jpg' },
-    { src: '/media/video/reel4.mp4', poster: '/media/video/reel4.jpg' },
-    { src: '/media/video/reel5.mp4', poster: '/media/video/reel5.jpg' },
-    { src: '/media/video/reel6.mp4', poster: '/media/video/reel6.jpg' },
+    { src: mediaAsset('video/reel1.mp4'), poster: mediaAsset('video/reel1.jpg') },
+    { src: mediaAsset('video/reel2.mp4'), poster: mediaAsset('video/reel2.jpg') },
+    { src: mediaAsset('video/reel3.mp4'), poster: mediaAsset('video/reel3.jpg') },
+    { src: mediaAsset('video/reel4.mp4'), poster: mediaAsset('video/reel4.jpg') },
+    { src: mediaAsset('video/reel5.mp4'), poster: mediaAsset('video/reel5.jpg') },
+    { src: mediaAsset('video/reel6.mp4'), poster: mediaAsset('video/reel6.jpg') },
   ],
 };
 
@@ -113,27 +116,27 @@ export const showreel = {
  * Это портретная съёмка, не событийная, поэтому вынесена из галереи праздников.
  */
 export const aboutPhotos: { src: string; alt: string }[] = [
-  { src: '/media/photos/g17.jpg', alt: 'Юлия Собенина — студийный портрет' },
-  { src: '/media/photos/about.jpg', alt: 'Портрет ведущей Юлии Собениной' },
-  { src: '/media/photos/g15.jpg', alt: 'Юлия Собенина, портретная съёмка' },
-  { src: '/media/photos/g19.jpg', alt: 'Юлия Собенина в студии' },
-  { src: '/media/photos/g13.jpg', alt: 'Юлия Собенина, портретная фотосессия' },
+  { src: mediaAsset('photos/g17.jpg'), alt: 'Юлия Собенина — студийный портрет' },
+  { src: mediaAsset('photos/about.jpg'), alt: 'Портрет ведущей Юлии Собениной' },
+  { src: mediaAsset('photos/g15.jpg'), alt: 'Юлия Собенина, портретная съёмка' },
+  { src: mediaAsset('photos/g19.jpg'), alt: 'Юлия Собенина в студии' },
+  { src: mediaAsset('photos/g13.jpg'), alt: 'Юлия Собенина, портретная фотосессия' },
 ];
 
 /** Галерея «Живые моменты с праздников» — только событийные фото. Лежат в /public/media/photos. */
 export const gallery: { src: string; alt: string }[] = [
-  { src: '/media/photos/g01.jpg', alt: 'Юлия Собенина ведёт свадьбу на природе' },
-  { src: '/media/photos/g02.jpg', alt: 'Момент свадебной церемонии' },
-  { src: '/media/photos/g03.jpg', alt: 'Гости на празднике' },
-  { src: '/media/photos/g04.jpg', alt: 'Эмоции гостей на свадьбе' },
-  { src: '/media/photos/g05.jpg', alt: 'Юлия Собенина на мероприятии' },
-  { src: '/media/photos/g06.jpg', alt: 'Атмосфера свадебного вечера' },
-  { src: '/media/photos/g07.jpg', alt: 'Ведущая с гостями праздника' },
-  { src: '/media/photos/g08.jpg', alt: 'Детали свадебного торжества' },
-  { src: '/media/photos/g09.jpg', alt: 'Праздничный момент на событии' },
-  { src: '/media/photos/g10.jpg', alt: 'Юлия Собенина ведёт мероприятие' },
-  { src: '/media/photos/g11.jpg', alt: 'Живые эмоции гостей' },
-  { src: '/media/photos/g12.jpg', alt: 'Свадебное торжество' },
+  { src: mediaAsset('photos/g01.jpg'), alt: 'Юлия Собенина ведёт свадьбу на природе' },
+  { src: mediaAsset('photos/g02.jpg'), alt: 'Момент свадебной церемонии' },
+  { src: mediaAsset('photos/g03.jpg'), alt: 'Гости на празднике' },
+  { src: mediaAsset('photos/g04.jpg'), alt: 'Эмоции гостей на свадьбе' },
+  { src: mediaAsset('photos/g05.jpg'), alt: 'Юлия Собенина на мероприятии' },
+  { src: mediaAsset('photos/g06.jpg'), alt: 'Атмосфера свадебного вечера' },
+  { src: mediaAsset('photos/g07.jpg'), alt: 'Ведущая с гостями праздника' },
+  { src: mediaAsset('photos/g08.jpg'), alt: 'Детали свадебного торжества' },
+  { src: mediaAsset('photos/g09.jpg'), alt: 'Праздничный момент на событии' },
+  { src: mediaAsset('photos/g10.jpg'), alt: 'Юлия Собенина ведёт мероприятие' },
+  { src: mediaAsset('photos/g11.jpg'), alt: 'Живые эмоции гостей' },
+  { src: mediaAsset('photos/g12.jpg'), alt: 'Свадебное торжество' },
 ];
 
 export const steps = [
@@ -187,7 +190,7 @@ export const eventTypes = [
 
 /** Отзывы — скриншоты из папки «отзывы» (реальные). */
 export const reviews: { src: string; alt: string }[] = Array.from({ length: 13 }, (_, i) => ({
-  src: `/media/reviews/r${String(i + 1).padStart(2, '0')}.jpg`,
+  src: mediaAsset(`reviews/r${String(i + 1).padStart(2, '0')}.jpg`),
   alt: `Отзыв клиента о ведущей Юлии Собениной №${i + 1}`,
 }));
 

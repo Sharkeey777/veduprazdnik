@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { hero } from '../content';
+import { hero, mediaAsset } from '../content';
 import { IconPlay, IconArrowUpRight } from './icons';
 
 export default function Hero() {
@@ -15,7 +15,7 @@ export default function Hero() {
       {/* Фоновое фото с параллаксом */}
       <motion.div style={{ y, scale }} className="absolute inset-0 -z-10">
         <img
-          src="/media/photos/hero.jpg"
+          src={mediaAsset('photos/hero.jpg')}
           alt="Юлия Собенина ведёт торжество с микрофоном"
           className="h-full w-full object-cover object-[72%_18%]"
           fetchPriority="high"
