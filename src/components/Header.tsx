@@ -6,21 +6,24 @@ import { IconMenu, IconClose } from './icons';
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [pendingHref, setPendingHref] = useState<string | null>(null);
 
   const navigateFromMenu = (href: string) => {
+    setPendingHref(href);
     setOpen(false);
+  };
 
-    // Wait for the drawer to release body scrolling before moving to the target.
-    window.setTimeout(() => {
-      const target = document.querySelector(href);
-      if (target) {
-        // A long page makes native smooth scrolling feel unresponsive after closing the drawer.
-        document.documentElement.style.scrollBehavior = 'auto';
-        target.scrollIntoView({ block: 'start' });
-        document.documentElement.style.scrollBehavior = '';
-      }
-      window.history.replaceState(null, '', href);
-    }, 460);
+  const completeMenuNavigation = () => {
+    if (!pendingHref) return;
+
+    const target = document.querySelector(pendingHref);
+    if (target) {
+      document.documentElement.style.scrollBehavior = 'auto';
+      target.scrollIntoView({ block: 'start' });
+      document.documentElement.style.scrollBehavior = '';
+    }
+    window.history.replaceState(null, '', pendingHref);
+    setPendingHref(null);
   };
 
   useEffect(() => {
@@ -82,7 +85,7 @@ export default function Header() {
         </button>
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={completeMenuNavigation}>
         {open && (
           <motion.div
             className="fixed inset-0 z-[60] lg:hidden"

@@ -78,6 +78,18 @@ export const IconArrowUpRight = (p: P) => (
   </svg>
 );
 
+export const IconArrowLeft = (p: P) => (
+  <svg {...base(p)}>
+    <path d="M19 12H5M11 18l-6-6 6-6" />
+  </svg>
+);
+
+export const IconArrowRight = (p: P) => (
+  <svg {...base(p)}>
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+);
+
 export const IconPlay = (p: P) => (
   <svg {...base({ ...p, fill: 'currentColor', stroke: 'none' })}>
     <path d="M8 5.2c0-.9 1-1.5 1.8-1L18 9c.8.5.8 1.6 0 2l-8.2 4.8c-.8.5-1.8-.1-1.8-1V5.2Z" />

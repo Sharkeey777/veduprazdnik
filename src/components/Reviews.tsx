@@ -1,17 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { reviews } from '../content';
 import Reveal from './Reveal';
-import { IconClose } from './icons';
+import { IconArrowLeft, IconArrowRight, IconClose } from './icons';
 
 export default function Reviews() {
   const [zoom, setZoom] = useState<string | null>(null);
-  // Дублируем список, чтобы лента прокручивалась бесшовно
-  const track = [...reviews, ...reviews];
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const scrollReviews = (direction: -1 | 1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollBy({ left: direction * Math.min(track.clientWidth * 0.82, 360), behavior: 'smooth' });
+  };
 
   useEffect(() => {
     if (!zoom) return;
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setZoom(null);
+    const onKey = (event: KeyboardEvent) => event.key === 'Escape' && setZoom(null);
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [zoom]);
@@ -19,36 +24,62 @@ export default function Reviews() {
   return (
     <section id="reviews" className="relative overflow-hidden bg-milk py-24 sm:py-32">
       <div className="container-luxe">
-        <div className="mb-12 max-w-xl">
+        <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <Reveal>
-            <span className="eyebrow">Отзывы</span>
-            <h2 className="heading mt-5 text-4xl sm:text-5xl">Что говорят клиенты</h2>
-            <p className="mt-5 text-graphite/70">
-              Живые отклики гостей и молодожёнов. Нажмите на скриншот, чтобы прочитать целиком.
-            </p>
+            <div className="max-w-xl">
+              <span className="eyebrow">Отзывы</span>
+              <h2 className="heading mt-5 text-4xl sm:text-5xl">Что говорят клиенты</h2>
+              <p className="mt-5 text-graphite/70">
+                Живые отклики гостей и молодожёнов. Листайте стрелками или свайпом, нажмите на
+                скриншот, чтобы прочитать целиком.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => scrollReviews(-1)}
+                aria-label="Предыдущие отзывы"
+                className="grid h-12 w-12 place-items-center rounded-full border border-graphite/15 bg-white text-ink shadow-soft transition hover:-translate-y-0.5 hover:border-gold hover:text-gold-deep"
+              >
+                <IconArrowLeft width={20} height={20} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollReviews(1)}
+                aria-label="Следующие отзывы"
+                className="grid h-12 w-12 place-items-center rounded-full border border-graphite/15 bg-white text-ink shadow-soft transition hover:-translate-y-0.5 hover:border-gold hover:text-gold-deep"
+              >
+                <IconArrowRight width={20} height={20} />
+              </button>
+            </div>
           </Reveal>
         </div>
       </div>
 
-      {/* Бегущая лента отзывов — плавно едет, останавливается при наведении */}
-      <div className="marquee-mask relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-milk to-transparent sm:w-28" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-milk to-transparent sm:w-28" />
+      <div className="relative">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-milk to-transparent sm:w-20" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-milk to-transparent sm:w-20" />
 
-        <div className="flex w-max animate-marquee gap-5 px-2.5">
-          {track.map((r, i) => (
+        <div
+          ref={trackRef}
+          className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-3 sm:px-8 lg:px-12"
+        >
+          {reviews.map((review) => (
             <button
-              key={`${r.src}-${i}`}
+              key={review.src}
               type="button"
-              onClick={() => setZoom(r.src)}
-              aria-label={`Открыть ${r.alt}`}
-              className="group block shrink-0 overflow-hidden rounded-2xl border border-graphite/10 bg-white shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-card"
+              onClick={() => setZoom(review.src)}
+              aria-label={`Открыть ${review.alt}`}
+              className="group block shrink-0 snap-start overflow-hidden rounded-2xl border border-graphite/10 bg-white shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-card"
             >
               <img
-                src={r.src}
-                alt={r.alt}
+                src={review.src}
+                alt={review.alt}
                 loading="lazy"
-                className="h-[340px] w-auto transition-transform duration-700 group-hover:scale-[1.02] sm:h-[400px]"
+                className="h-[340px] max-w-[78vw] object-contain transition-transform duration-700 group-hover:scale-[1.02] sm:h-[400px] sm:max-w-[320px]"
               />
             </button>
           ))}
@@ -78,7 +109,7 @@ export default function Reviews() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(event) => event.stopPropagation()}
               className="max-h-[88vh] max-w-full rounded-lg object-contain shadow-card"
             />
           </motion.div>
