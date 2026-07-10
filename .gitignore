@@ -15,6 +15,7 @@ dist-ssr
 # Tooling artifacts (не нужны в репозитории)
 .impeccable/
 .playwright-mcp/
+.playwright-cli/
 
 # Editor directories and files
 .vscode/*

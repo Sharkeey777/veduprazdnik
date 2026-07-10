@@ -7,6 +7,16 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const navigateFromMenu = (href: string) => {
+    setOpen(false);
+
+    // Wait for the drawer to release body scrolling before moving to the target.
+    window.setTimeout(() => {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState(null, '', href);
+    }, 460);
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
@@ -99,7 +109,10 @@ export default function Header() {
                   <motion.a
                     key={item.href}
                     href={item.href}
-                    onClick={() => setOpen(false)}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      navigateFromMenu(item.href);
+                    }}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.06 }}
@@ -110,7 +123,14 @@ export default function Header() {
                 ))}
               </nav>
 
-              <a href="#contacts" onClick={() => setOpen(false)} className="btn-gold mt-auto w-full">
+              <a
+                href="#contacts"
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigateFromMenu('#contacts');
+                }}
+                className="btn-gold mt-auto w-full"
+              >
                 Узнать свободную дату
               </a>
             </motion.div>
