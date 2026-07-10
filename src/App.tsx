@@ -10,6 +10,7 @@ import Reviews from './components/Reviews';
 import CTA from './components/CTA';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import StudioCredit from './components/StudioCredit';
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <ContactSection />
       </main>
       <Footer />
+      <StudioCredit />
     </>
   );
 }

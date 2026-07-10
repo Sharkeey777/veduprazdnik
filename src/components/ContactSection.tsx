@@ -1,6 +1,6 @@
 import { contacts, site } from '../content';
 import Reveal from './Reveal';
-import { IconTelegram, IconVk, IconInstagram } from './icons';
+import { IconMax, IconTelegram, IconVk, IconInstagram } from './icons';
 
 /**
  * Прямой контакт без формы: люди пишут Юлии напрямую в Telegram.
@@ -11,6 +11,7 @@ export default function ContactSection() {
 
   const socials = [
     { icon: IconTelegram, label: 'Telegram', value: contacts.telegram, href: contacts.telegramHref },
+    { icon: IconMax, label: 'MAX', value: contacts.max, href: contacts.maxHref },
     { icon: IconVk, label: 'ВКонтакте', value: 'vk.com/y.sobenina', href: contacts.vkPageHref },
     { icon: IconInstagram, label: 'Instagram', value: '@sobenina_event', href: contacts.instagramHref },
   ];
@@ -32,7 +33,7 @@ export default function ContactSection() {
             <span className="eyebrow justify-center">Контакты</span>
             <h2 className="heading mt-5 text-4xl sm:text-5xl">Свяжитесь напрямую</h2>
             <p className="mt-6 text-lg leading-relaxed text-graphite/75">
-              Самый быстрый способ — написать Юлии в Telegram. Расскажите про дату, формат и город
+              Напишите Юлии в Telegram или MAX. Расскажите про дату, формат и город
               события — она ответит лично и подскажет, свободна ли дата.
             </p>
           </Reveal>
@@ -53,7 +54,7 @@ export default function ContactSection() {
         </div>
 
         <Reveal delay={0.15}>
-          <div className="mx-auto mt-14 grid max-w-3xl gap-3 sm:grid-cols-3">
+          <div className="mx-auto mt-14 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {socials.map((c) => (
               <a
                 key={c.label}

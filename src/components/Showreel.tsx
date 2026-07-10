@@ -81,20 +81,38 @@ export default function Showreel() {
           </Reveal>
         </div>
 
-        <Reveal>
-          <VideoCard
-            src={showreel.main.src}
-            poster={showreel.main.poster}
-            label={showreel.main.label}
-          />
-        </Reveal>
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
+          <Reveal>
+            <VideoCard
+              src={showreel.main.src}
+              poster={showreel.main.poster}
+              label={showreel.main.label}
+            />
+          </Reveal>
+          <Reveal delay={0.08}>
+            <VideoCard
+              src={showreel.sde.src}
+              poster={showreel.sde.poster}
+              label={showreel.sde.label}
+            />
+          </Reveal>
+        </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6">
-          {showreel.reels.map((r, i) => (
-            <Reveal key={r.src} delay={0.08 * i}>
-              <VideoCard src={r.src} poster={r.poster} vertical />
-            </Reveal>
-          ))}
+        <div className="mt-10">
+          <Reveal>
+            <h3 className="font-display text-2xl text-ink sm:text-3xl">Из закулисья и короткие ролики</h3>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-graphite/70">
+              Личные видео Юлии и вертикальные фрагменты с площадок — атмосфера и характер ведущей в
+              коротком формате.
+            </p>
+          </Reveal>
+          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
+            {showreel.reels.map((r, i) => (
+              <Reveal key={r.src} delay={0.06 * (i % 4)}>
+                <VideoCard src={r.src} poster={r.poster} vertical />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

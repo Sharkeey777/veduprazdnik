@@ -15,17 +15,18 @@ export const site = {
   city: 'Москва и Московская область',
 };
 
-/** Контакты. Реальные ссылки — из брифа. Телефон/WhatsApp/email — TODO. */
+/**
+ * Контакты. По решению заказчика связь только через мессенджеры/соцсети —
+ * телефона/WhatsApp/email на сайте нет, поэтому и в контенте их не держим.
+ */
 export const contacts = {
-  phoneDisplay: '+7 (___) ___-__-__', // TODO: реальный телефон
-  phoneHref: 'tel:+70000000000', // TODO: реальный номер в формате tel:+7...
-  whatsappHref: 'https://wa.me/70000000000', // TODO: номер WhatsApp (без +, пробелов)
   telegram: '@Sobenina_event',
   telegramHref: 'https://t.me/Sobenina_event',
+  max: 'MAX',
+  maxHref: 'https://max.ru/u/f9LHodD0cOKjgbucxj5FFJrgRPXa_S3_S85m7x9LT9jENWYFeS2bqpQ7ZaM',
   vkGroupHref: 'https://vk.com/club212339247',
   vkPageHref: 'https://vk.com/y.sobenina',
   instagramHref: 'https://instagram.com/sobenina_event',
-  email: '', // TODO: email, если есть (оставьте пустым, если нет)
 };
 
 export const nav = [
@@ -95,19 +96,29 @@ export const formats = [
 
 export const showreel = {
   title: 'Посмотрите, как Юлия работает вживую',
-  text: 'Живые эмоции гостей, атмосфера событий и стиль ведения — короткие фрагменты с реальных праздников.',
+  text: 'Живые эмоции гостей, атмосфера событий и стиль ведения — короткие фрагменты и авторские SDE-ролики с реальных праздников.',
+  /** Главное showreel-видео (горизонтальное). */
   main: {
     src: mediaAsset('video/showreel.mp4'),
     poster: mediaAsset('video/showreel.jpg'),
     label: 'Showreel — фрагменты с мероприятий',
   },
+  /** Второй горизонтальный акцент — авторский SDE-фильм со свадебного дня. */
+  sde: {
+    src: mediaAsset('video/sde-main.mp4'),
+    poster: mediaAsset('video/sde-main.jpg'),
+    label: 'SDE-ролик — фильм, смонтированный прямо в день свадьбы',
+  },
+  /** Вертикальные ролики: короткий SDE + личные видео Юлии «из закулисья». */
   reels: [
-    { src: mediaAsset('video/reel1.mp4'), poster: mediaAsset('video/reel1.jpg') },
-    { src: mediaAsset('video/reel2.mp4'), poster: mediaAsset('video/reel2.jpg') },
-    { src: mediaAsset('video/reel3.mp4'), poster: mediaAsset('video/reel3.jpg') },
-    { src: mediaAsset('video/reel4.mp4'), poster: mediaAsset('video/reel4.jpg') },
-    { src: mediaAsset('video/reel5.mp4'), poster: mediaAsset('video/reel5.jpg') },
-    { src: mediaAsset('video/reel6.mp4'), poster: mediaAsset('video/reel6.jpg') },
+    { src: mediaAsset('video/sde-reel.mp4'), poster: mediaAsset('video/sde-reel.jpg') },
+    { src: mediaAsset('video/personal01.mp4'), poster: mediaAsset('video/personal01.jpg') },
+    { src: mediaAsset('video/personal02.mp4'), poster: mediaAsset('video/personal02.jpg') },
+    { src: mediaAsset('video/personal03.mp4'), poster: mediaAsset('video/personal03.jpg') },
+    { src: mediaAsset('video/personal04.mp4'), poster: mediaAsset('video/personal04.jpg') },
+    { src: mediaAsset('video/personal05.mp4'), poster: mediaAsset('video/personal05.jpg') },
+    { src: mediaAsset('video/personal06.mp4'), poster: mediaAsset('video/personal06.jpg') },
+    { src: mediaAsset('video/personal07.mp4'), poster: mediaAsset('video/personal07.jpg') },
   ],
 };
 
@@ -123,20 +134,82 @@ export const aboutPhotos: { src: string; alt: string }[] = [
   { src: mediaAsset('photos/g13.jpg'), alt: 'Юлия Собенина, портретная фотосессия' },
 ];
 
-/** Галерея «Живые моменты с праздников» — только событийные фото. Лежат в /public/media/photos. */
-export const gallery: { src: string; alt: string }[] = [
-  { src: mediaAsset('photos/g01.jpg'), alt: 'Юлия Собенина ведёт свадьбу на природе' },
-  { src: mediaAsset('photos/g02.jpg'), alt: 'Момент свадебной церемонии' },
-  { src: mediaAsset('photos/g03.jpg'), alt: 'Гости на празднике' },
-  { src: mediaAsset('photos/g04.jpg'), alt: 'Эмоции гостей на свадьбе' },
-  { src: mediaAsset('photos/g05.jpg'), alt: 'Юлия Собенина на мероприятии' },
-  { src: mediaAsset('photos/g06.jpg'), alt: 'Атмосфера свадебного вечера' },
-  { src: mediaAsset('photos/g07.jpg'), alt: 'Ведущая с гостями праздника' },
-  { src: mediaAsset('photos/g08.jpg'), alt: 'Детали свадебного торжества' },
-  { src: mediaAsset('photos/g09.jpg'), alt: 'Праздничный момент на событии' },
-  { src: mediaAsset('photos/g10.jpg'), alt: 'Юлия Собенина ведёт мероприятие' },
-  { src: mediaAsset('photos/g11.jpg'), alt: 'Живые эмоции гостей' },
-  { src: mediaAsset('photos/g12.jpg'), alt: 'Свадебное торжество' },
+/**
+ * Галерея «Живые моменты с праздников».
+ * Разбита по типам событий: свадьбы, дни рождения, Новый год.
+ * В каждой вкладке — и видео (с постером), и фото. Медиа лежит в /public/media/gallery/*.
+ */
+export type GalleryMedia =
+  | { type: 'video'; src: string; poster: string; alt: string }
+  | { type: 'photo'; src: string; alt: string };
+
+export type GalleryCategory = {
+  id: string;
+  label: string;
+  caption: string;
+  items: GalleryMedia[];
+};
+
+/** Хелпер: сгенерировать список пронумерованных ассетов (w01, w02, …). */
+const seq = (count: number, fn: (n: string, i: number) => GalleryMedia): GalleryMedia[] =>
+  Array.from({ length: count }, (_, i) => fn(String(i + 1).padStart(2, '0'), i));
+
+export const galleryCategories: GalleryCategory[] = [
+  {
+    id: 'wedding',
+    label: 'Свадьбы',
+    caption: 'Церемонии, первые танцы и самые тёплые моменты дня — вживую и в кадре.',
+    items: [
+      ...seq(17, (n, i) => ({
+        type: 'video',
+        src: mediaAsset(`gallery/wedding/wv${n}.mp4`),
+        poster: mediaAsset(`gallery/wedding/wv${n}.jpg`),
+        alt: `Видео со свадьбы, которую вела Юлия Собенина №${i + 1}`,
+      })),
+      ...seq(26, (n, i) => ({
+        type: 'photo',
+        src: mediaAsset(`gallery/wedding/w${n}.jpg`),
+        alt: `Момент со свадьбы с ведущей Юлией Собениной №${i + 1}`,
+      })),
+    ],
+  },
+  {
+    id: 'birthday',
+    label: 'Дни рождения',
+    caption: 'Юбилеи и дни рождения — праздник вокруг героя вечера, тепло и с юмором.',
+    items: [
+      {
+        type: 'video',
+        src: mediaAsset('gallery/birthday/bv01.mp4'),
+        poster: mediaAsset('gallery/birthday/bv01.jpg'),
+        alt: 'Видео с дня рождения, которое вела Юлия Собенина',
+      },
+      ...seq(3, (n, i) => ({
+        type: 'photo',
+        src: mediaAsset(`gallery/birthday/b${n}.jpg`),
+        alt: `Момент с дня рождения с ведущей Юлией Собениной №${i + 1}`,
+      })),
+    ],
+  },
+  {
+    id: 'newyear',
+    label: 'Новый год',
+    caption: 'Новогодние вечера и корпоративы в атмосфере настоящего праздника.',
+    items: [
+      {
+        type: 'video',
+        src: mediaAsset('gallery/newyear/nv01.mp4'),
+        poster: mediaAsset('gallery/newyear/nv01.jpg'),
+        alt: 'Видео с новогоднего вечера, который вела Юлия Собенина №1',
+      },
+      {
+        type: 'video',
+        src: mediaAsset('gallery/newyear/nv02.mp4'),
+        poster: mediaAsset('gallery/newyear/nv02.jpg'),
+        alt: 'Видео с новогоднего вечера, который вела Юлия Собенина №2',
+      },
+    ],
+  },
 ];
 
 export const steps = [
@@ -194,8 +267,10 @@ export const reviews: { src: string; alt: string }[] = Array.from({ length: 13 }
   alt: `Отзыв клиента о ведущей Юлии Собениной №${i + 1}`,
 }));
 
-export const legal = {
-  // TODO: подставьте реальные реквизиты (ФИО/самозанятость/ИП, ИНН, контакты оператора ПДн)
-  operator: 'TODO: ФИО / статус (самозанятый / ИП), ИНН',
-  updated: 'TODO: дата последней редакции',
+/** Студия-разработчик сайта — кредит в самом низу страницы. */
+export const studio = {
+  name: 'Далее',
+  tagline: 'Студия digital-решений',
+  made: 'Сайт создан в студии',
+  href: '', // ссылка на студию (сайт / Telegram); пусто — просто текст без ссылки
 };

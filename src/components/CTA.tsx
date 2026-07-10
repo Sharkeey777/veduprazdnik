@@ -1,6 +1,6 @@
 import { cta, contacts } from '../content';
 import Reveal from './Reveal';
-import { IconTelegram, IconVk, IconInstagram } from './icons';
+import { IconMax, IconTelegram, IconVk, IconInstagram } from './icons';
 
 export default function CTA() {
   return (
@@ -30,6 +30,9 @@ export default function CTA() {
               <div className="flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap lg:flex-col">
                 <a href={contacts.telegramHref} target="_blank" rel="noopener noreferrer" className="btn-gold">
                   <IconTelegram width={18} height={18} /> Написать в Telegram
+                </a>
+                <a href={contacts.maxHref} target="_blank" rel="noopener noreferrer" className="btn-ghost-light">
+                  <IconMax width={18} height={18} /> Написать в MAX
                 </a>
                 <a href={contacts.vkPageHref} target="_blank" rel="noopener noreferrer" className="btn-ghost-light">
                   <IconVk width={18} height={18} /> ВКонтакте

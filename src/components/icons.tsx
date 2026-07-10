@@ -96,6 +96,13 @@ export const IconTelegram = (p: P) => (
   </svg>
 );
 
+export const IconMax = (p: P) => (
+  <svg {...base({ ...p, strokeWidth: 2.4 })}>
+    <path d="m4 17 4.2-10L12 14l3.8-7L20 17" />
+    <path d="M4 17h4M16 17h4" />
+  </svg>
+);
+
 export const IconVk = (p: P) => (
   <svg {...base({ ...p, fill: 'currentColor', stroke: 'none' })}>
     <path d="M12.7 16.5c-5.2 0-8.6-3.7-8.7-9.8h2.7c.1 4.5 2.1 6.3 3.6 6.7V6.7h2.5v3.8c1.5-.2 3-1.8 3.6-3.8h2.5c-.4 2.4-2 4-3.1 4.7 1.1.6 2.9 2 3.6 4.4h-2.8c-.5-1.7-1.9-3-3.3-3.2v3.2h-.9Z" />

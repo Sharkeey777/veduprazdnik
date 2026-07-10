@@ -1,11 +1,12 @@
 import { nav, contacts, site } from '../content';
-import { IconTelegram, IconVk, IconInstagram } from './icons';
+import { IconMax, IconTelegram, IconVk, IconInstagram } from './icons';
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   const socials = [
     { icon: IconTelegram, href: contacts.telegramHref, label: 'Telegram' },
+    { icon: IconMax, href: contacts.maxHref, label: 'MAX' },
     { icon: IconVk, href: contacts.vkPageHref, label: 'ВКонтакте' },
     { icon: IconInstagram, href: contacts.instagramHref, label: 'Instagram' },
   ];
@@ -50,6 +51,11 @@ export default function Footer() {
               <li>
                 <a href={contacts.telegramHref} target="_blank" rel="noopener noreferrer" className="text-sm text-milk/70 transition-colors hover:text-gold">
                   Написать в Telegram
+                </a>
+              </li>
+              <li>
+                <a href={contacts.maxHref} target="_blank" rel="noopener noreferrer" className="text-sm text-milk/70 transition-colors hover:text-gold">
+                  Написать в MAX
                 </a>
               </li>
             </ul>
