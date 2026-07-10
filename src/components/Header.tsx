@@ -12,7 +12,13 @@ export default function Header() {
 
     // Wait for the drawer to release body scrolling before moving to the target.
     window.setTimeout(() => {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      const target = document.querySelector(href);
+      if (target) {
+        // A long page makes native smooth scrolling feel unresponsive after closing the drawer.
+        document.documentElement.style.scrollBehavior = 'auto';
+        target.scrollIntoView({ block: 'start' });
+        document.documentElement.style.scrollBehavior = '';
+      }
       window.history.replaceState(null, '', href);
     }, 460);
   };
