@@ -108,9 +108,6 @@ export default function Gallery() {
                   }`}
                 >
                   {cat.label}
-                  <span className={`ml-2 text-xs ${activeTab ? 'text-gold/90' : 'text-graphite/40'}`}>
-                    {cat.items.length}
-                  </span>
                 </button>
               );
             })}

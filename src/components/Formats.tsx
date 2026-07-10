@@ -94,22 +94,6 @@ export default function Formats() {
             );
           })}
         </div>
-
-        <Reveal delay={0.1}>
-          <div className="mt-8 flex flex-col items-start justify-between gap-5 rounded-2xl border border-gold/25 bg-white/[0.04] px-7 py-6 backdrop-blur-sm sm:flex-row sm:items-center">
-            <p className="max-w-xl text-milk/75">
-              <span className="text-milk">Не нашли свой формат?</span> Соберём программу под вашу
-              идею — от нестандартного повода до события в своём уникальном стиле.
-            </p>
-            <a
-              href="#contacts"
-              className="btn-gold shrink-0"
-            >
-              Рассказать о событии
-              <IconArrowUpRight width={17} height={17} />
-            </a>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

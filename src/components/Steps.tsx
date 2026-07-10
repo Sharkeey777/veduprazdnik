@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
-import { steps, contacts } from '../content';
+import { steps } from '../content';
 import Reveal from './Reveal';
-import { IconArrowUpRight } from './icons';
 
 export default function Steps() {
   return (
@@ -60,24 +59,6 @@ export default function Steps() {
             </motion.article>
           ))}
         </div>
-
-        <Reveal delay={0.1}>
-          <div className="mt-12 flex flex-col items-start justify-between gap-5 rounded-2xl border border-gold/25 bg-gradient-to-br from-champagne/50 to-cream/40 px-7 py-6 sm:flex-row sm:items-center">
-            <p className="max-w-xl text-graphite/80">
-              На подготовку обычно уходит от пары недель до нескольких месяцев — чем раньше
-              познакомимся, тем спокойнее пройдёт путь к вашему празднику.
-            </p>
-            <a
-              href={contacts.telegramHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold shrink-0"
-            >
-              Обсудить дату
-              <IconArrowUpRight width={17} height={17} />
-            </a>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

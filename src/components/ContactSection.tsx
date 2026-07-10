@@ -61,14 +61,14 @@ export default function ContactSection() {
                 href={c.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-4 rounded-2xl border border-graphite/10 bg-white/70 px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-soft"
+                className="group grid min-h-[68px] grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-4 rounded-2xl border border-graphite/10 bg-white/70 px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-soft"
               >
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold/12 text-gold-deep transition-colors group-hover:bg-gold group-hover:text-white">
                   <c.icon width={20} height={20} />
                 </span>
-                <span className="flex flex-col">
+                <span className="flex min-w-0 flex-col gap-1 leading-none">
                   <span className="text-xs uppercase tracking-wide text-graphite/50">{c.label}</span>
-                  <span className="font-medium text-ink">{c.value}</span>
+                  <span className="truncate font-medium text-ink">{c.value}</span>
                 </span>
               </a>
             ))}
