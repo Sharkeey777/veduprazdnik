@@ -4,7 +4,7 @@ import { IconMax, IconTelegram, IconVk, IconInstagram } from './icons';
 
 export default function CTA() {
   return (
-    <section className="relative overflow-hidden bg-graphite py-20 sm:py-24">
+    <section id="contacts" className="relative overflow-hidden bg-graphite py-20 sm:py-24">
       <div
         className="pointer-events-none absolute -left-32 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-gold/15 blur-3xl"
         aria-hidden
