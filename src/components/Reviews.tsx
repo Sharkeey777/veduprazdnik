@@ -11,7 +11,21 @@ export default function Reviews() {
   const scrollReviews = (direction: -1 | 1) => {
     const track = trackRef.current;
     if (!track) return;
-    track.scrollBy({ left: direction * Math.min(track.clientWidth * 0.82, 360), behavior: 'smooth' });
+
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    const step = Math.min(track.clientWidth * 0.82, 360);
+
+    if (direction === 1 && track.scrollLeft >= maxScrollLeft - 4) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (direction === -1 && track.scrollLeft <= 4) {
+      track.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
+      return;
+    }
+
+    track.scrollBy({ left: direction * step, behavior: 'smooth' });
   };
 
   useEffect(() => {
